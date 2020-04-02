@@ -168,7 +168,8 @@ void parse_file ( char * filename,
              xvals, yvals, zvals, &r);
       add_circle( edges, xvals[0], yvals[0], zvals[0], r, step);
       matrix_mult(peek(csystems), edges);
-      draw_polygons(edges, s, c);
+      draw_lines(edges, s, c);
+      edges->lastcol = 0;
     }//end of circle
 
     else if ( strncmp(line, "hermite", strlen(line)) == 0 ||
@@ -194,7 +195,8 @@ void parse_file ( char * filename,
           add_curve( edges, xvals[0], yvals[0], xvals[1], yvals[1],
                      xvals[2], yvals[2], xvals[3], yvals[3], step, type);
           matrix_mult(peek(csystems), edges);
-          draw_polygons(edges, s, c);
+          draw_lines(edges, s, c);
+          edges->lastcol = 0;
         }//end of curve
         else if ( strncmp(line, "line", strlen(line)) == 0 ) {
           fgets(line, sizeof(line), f);
@@ -209,7 +211,8 @@ void parse_file ( char * filename,
           add_edge(edges, xvals[0], yvals[0], zvals[0],
                    xvals[1], yvals[1], zvals[1]);
           matrix_mult(peek(csystems), edges);
-          draw_polygons(edges, s, c);
+          draw_lines(edges, s, c);
+          edges->lastcol = 0;
 
         }//end line
 
